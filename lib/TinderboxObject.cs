@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-namespace Tinderbox
+namespace TinderBox
 {
-    public static partial class TinderboxAPI
+    public static partial class TinderBoxAPI
     {
         static void _IsReady()
         {
@@ -26,7 +26,7 @@ namespace Tinderbox
             {
                 throw new Exception("The Game ID needs to be set in the Tinderbox Object.");
             }
-            return TinderboxConfig.BaseURL + id + urlType;
+            return TinderBoxConfig.BaseURL + id + urlType;
         }
 
         static KeyCode ControlsToKeyCode(Players player, Controls control)
@@ -160,20 +160,20 @@ namespace Tinderbox
         //    }
         //}
 
-        static TinderboxObject _instance = null;
-        static TinderboxObject Instance
+        static TinderBoxObject _instance = null;
+        static TinderBoxObject Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = GameObject.FindObjectOfType<TinderboxObject>();
+                    _instance = GameObject.FindObjectOfType<TinderBoxObject>();
                 }
                 return _instance;
             }
         }
     }
-    public class TinderboxObject : MonoBehaviour
+    public class TinderBoxObject : MonoBehaviour
     {
         public string GameID = "";
         public void CallURL(string url)

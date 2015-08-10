@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Tinderbox
+namespace TinderBox
 {
-    public static partial class TinderboxAPI
+    public static partial class TinderBoxAPI
     {
-        static class TinderboxConfig
+        static class TinderBoxConfig
         {
             public static readonly string BaseURL = "http://10.0.0.242:5000/api/games/";
         }
