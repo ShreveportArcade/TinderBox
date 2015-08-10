@@ -1,16 +1,22 @@
 # TinderBox API
 This is the API for the TinderBox arcade system.
 
+## Workflow ##
+1. When a player chooses your game, our launcher will run your game's executable in a background process.
+1. Once your game has loaded its assets and is ready to play, it should send a **game_ready** command to the launcher (see below).
+1. The launcher will present your game fullscreen at 1920x1080 resolution.
+1. After the player has completed a game and is out of continues (or lets your "continue playing?" timer run out), your game should send a **game_ended** command to bring the launcher back to the front.
+
 ## Installation (for Unity)
 1. Import the TinderBoxAPI.unitypackage file into your Unity project.
-2. Add the TinderBoxObject prefab to your scene.
-3. In the TinderBoxObject inspector, set the **Game ID** field to your game's assigned ID, and the **Host** field to the current arcade cabinet's address.
+1. Add the TinderBoxObject prefab to your scene.
+1. In the TinderBoxObject inspector, set the **Game ID** field to your game's assigned ID.
+1. In your game's Player Settings, set "Display Resolution Dialog" to "Hidden By Default".
 
 ## Usage (for Unity)
 1. Add `using Tinderbox;` to your using statements in any files you want to access the API from.
-2. After your game assets are loaded and the game is ready to play, you will need to call `TinderBoxAPI.IsReady();`.  This will tell the launcher that the game is ready to present to the player.
-3. When the game has ended, call `TinderBoxAPI.GameOver();`.  This will return to the launcher screen.
-4. Use `TinderBoxAPI.ControlState()`, `TinderBoxAPI.ControlUp()`, and `TinderBoxAPI.ControlDown()` to find the status of the arcade controls.  You will need to provide the player ID and the control name, listed below: 
+1. Observe the workflow at the top of this page, using the API commands `TinderBoxAPI.IsReady()` and `TinderBoxAPI.GameOver()`.
+1. Use `TinderBoxAPI.ControlState()`, `TinderBoxAPI.ControlUp()`, and `TinderBoxAPI.ControlDown()` to find the status of the arcade controls.  You will need to provide the player ID and the control name, listed below: 
 ```c#
 
     public enum Players
@@ -37,11 +43,10 @@ This is the API for the TinderBox arcade system.
 ```
 
 
-## Usage (general)
-1. You will need to make http requests.  The URL structure is: **http://** + *host* + **/api/games/** + *game id* + **/** + *command*
-2. After your game assets are loaded and the game is ready to play, you will need to make a request using the **ready** command.  This will tell the launcher that the game is ready to present to the player.
-3. When the game has ended, make a request using the **ended** command.  This will return to the launcher screen.
-4. Map your controls to a receive keyboard inputs.  Use these mappings:
+## Usage (non-Unity)
+1. To give the launcher a command, send an HTTP GET request to: http://localhost/api/{command}?game_id={your-game-id}
+1. Observe the workflow at the top of this page, using the API commands **game_ready** and **game_ended**.
+1. Map your controls to a receive keyboard inputs.  Use these mappings:
 
 ```
 Player 1
