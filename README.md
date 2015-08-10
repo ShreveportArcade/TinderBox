@@ -1,5 +1,5 @@
 # TinderBox API
-This is the API for the TinderBox arcade system.  Currently, this package is meant to support games made in Unity, although it is not required.
+This is the API for the TinderBox arcade system.
 
 ## Installation (for Unity)
 1. Import the TinderBoxAPI.unitypackage file into your Unity project.
