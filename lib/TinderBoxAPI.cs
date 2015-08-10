@@ -5,10 +5,6 @@ namespace TinderBox
 {
     public static partial class TinderBoxAPI
     {
-        static class TinderBoxConfig
-        {
-            public static readonly string BaseURL = "http://10.0.0.242:5000/api/games/";
-        }
         /// <summary>
         /// Call this when the game is fully loaded and ready to present to the player.
         /// </summary>

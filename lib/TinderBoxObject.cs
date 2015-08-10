@@ -15,7 +15,7 @@ namespace TinderBox
         {
             Instance.CallURL(MakeURL(GameOverURL));
         }
-
+        static readonly string BaseURL = "/api/games/";
         static readonly string IsReadyURL = "ready";
         static readonly string GameOverURL = "ended";
 
@@ -26,7 +26,7 @@ namespace TinderBox
             {
                 throw new Exception("The Game ID needs to be set in the Tinderbox Object.");
             }
-            return TinderBoxConfig.BaseURL + id + urlType;
+            return Instance.Host + BaseURL + id + "/" + urlType;
         }
 
         static KeyCode ControlsToKeyCode(Players player, Controls control)
@@ -175,6 +175,7 @@ namespace TinderBox
     }
     public class TinderBoxObject : MonoBehaviour
     {
+        public string Host = "http://10.0.0.242:5000";
         public string GameID = "";
         public void CallURL(string url)
         {
