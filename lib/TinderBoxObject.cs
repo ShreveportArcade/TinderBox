@@ -16,8 +16,8 @@ namespace TinderBox
             Instance.CallURL(MakeURL(GameOverURL));
         }
         static readonly string BaseURL = "http://localhost:5000/api/games/";
-        static readonly string IsReadyURL = "ready";
-        static readonly string GameOverURL = "ended";
+        static readonly string IsReadyURL = "game_ready";
+        static readonly string GameOverURL = "game_ended";
 
         static string MakeURL(string urlType)
         {

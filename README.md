@@ -14,7 +14,7 @@ This is the API for the TinderBox arcade system.
 1. In your game's Player Settings, set "Display Resolution Dialog" to "Hidden By Default".
 
 ## Usage (for Unity)
-1. Add `using Tinderbox;` to your using statements in any files you want to access the API from.
+1. Add `using TinderBox;` to your using statements in any files you want to access the API from.
 2. Observe the workflow at the top of this page, using the API commands `TinderBoxAPI.IsReady()` and `TinderBoxAPI.GameOver()`.
 3. Use `TinderBoxAPI.ControlState()`, `TinderBoxAPI.ControlUp()`, and `TinderBoxAPI.ControlDown()` to find the status of the arcade controls.  You will need to provide the player ID and the control name, listed below: 
 ```c#
