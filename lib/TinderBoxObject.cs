@@ -116,6 +116,13 @@ namespace TinderBox
         }
         static bool _ControlState(Players player, Controls control)
         {
+            if (player == Players.AnyPlayer)
+            {
+                return _ControlState(Players.Player1, control)
+                    || _ControlState(Players.Player2, control)
+                    || _ControlState(Players.Player3, control)
+                    || _ControlState(Players.Player4, control);
+            }
             return Input.GetKey(ControlsToKeyCode(player, control));
         }
 
@@ -125,6 +132,13 @@ namespace TinderBox
         }
         static bool _ControlUp(Players player, Controls control)
         {
+            if (player == Players.AnyPlayer)
+            {
+                return _ControlUp(Players.Player1, control)
+                    || _ControlUp(Players.Player2, control)
+                    || _ControlUp(Players.Player3, control)
+                    || _ControlUp(Players.Player4, control);
+            }
             return Input.GetKeyUp(ControlsToKeyCode(player, control));
         }
 
@@ -134,31 +148,15 @@ namespace TinderBox
         }
         static bool _ControlDown(Players player, Controls control)
         {
+            if (player == Players.AnyPlayer)
+            {
+                return _ControlDown(Players.Player1, control)
+                    || _ControlDown(Players.Player2, control)
+                    || _ControlDown(Players.Player3, control)
+                    || _ControlDown(Players.Player4, control);
+            }
             return Input.GetKeyDown(ControlsToKeyCode(player, control));
         }
-
-        //static void TestControls(bool heldDown = false)
-        //{
-        //    foreach (var value in System.Enum.GetValues(typeof(Controls)))
-        //    {
-        //        Controls control = (Controls)value;
-        //        if (ControlDown(control))
-        //        {
-        //            Debug.Log("\"" + control.ToString() + "\" pressed.");
-        //        }
-        //        if (ControlUp(control))
-        //        {
-        //            Debug.Log("\"" + control.ToString() + "\" released.");
-        //        }
-        //        if (heldDown)
-        //        {
-        //            if (ControlState(control))
-        //            {
-        //                Debug.Log("\"" + control.ToString() + "\" held down.");
-        //            }
-        //        }
-        //    }
-        //}
 
         static TinderBoxObject _instance = null;
         static TinderBoxObject Instance

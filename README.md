@@ -7,7 +7,7 @@ This is the API for the TinderBox arcade system.
 3. In the TinderBoxObject inspector, set the **Game ID** field to your game's assigned ID, and the **Host** field to the current arcade cabinet's address.
 
 ## Usage (for Unity)
-1. Add `using Tinderbox;` to your using statements in any files you want to access the API from.
+1. Add `using TinderBox;` to your using statements in any files you want to access the API from.
 2. After your game assets are loaded and the game is ready to play, you will need to call `TinderBoxAPI.IsReady();`.  This will tell the launcher that the game is ready to present to the player.
 3. When the game has ended, call `TinderBoxAPI.GameOver();`.  This will return to the launcher screen.
 4. Use `TinderBoxAPI.ControlState()`, `TinderBoxAPI.ControlUp()`, and `TinderBoxAPI.ControlDown()` to find the status of the arcade controls.  You will need to provide the player ID and the control name, listed below: 

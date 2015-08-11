@@ -95,7 +95,8 @@ namespace TinderBox
         Player1,
         Player2,
         Player3,
-        Player4
+        Player4,
+        AnyPlayer
     }
 
     public enum Controls
