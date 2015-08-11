@@ -18,6 +18,7 @@ namespace TinderBox
         static readonly string BaseURL = "http://localhost:5000/api/games/";
         static readonly string IsReadyURL = "game_ready";
         static readonly string GameOverURL = "game_ended";
+        public static readonly float QuitCommandHoldLength = 5f;
 
         static string MakeURL(string urlType)
         {
@@ -186,6 +187,32 @@ namespace TinderBox
             if (www.error != null)
             {
                 Debug.LogError(www.error);
+            }
+        }
+
+        float quitTimer = 0;
+        void Update()
+        {
+            // If all players hold Button 4 and 5 simultaneously for 5 seconds, the game ends.
+            if (TinderBoxAPI.ControlState(Players.Player1, Controls.Button4)
+            && TinderBoxAPI.ControlState(Players.Player2, Controls.Button4)
+            && TinderBoxAPI.ControlState(Players.Player3, Controls.Button4)
+            && TinderBoxAPI.ControlState(Players.Player4, Controls.Button4)
+            && TinderBoxAPI.ControlState(Players.Player1, Controls.Button5)
+            && TinderBoxAPI.ControlState(Players.Player2, Controls.Button5)
+            && TinderBoxAPI.ControlState(Players.Player3, Controls.Button5)
+            && TinderBoxAPI.ControlState(Players.Player4, Controls.Button5))
+            {
+                quitTimer += Time.deltaTime;
+            } 
+            else 
+            {
+                quitTimer = 0;
+            }
+            if (quitTimer > TinderBoxAPI.QuitCommandHoldLength) {
+                Debug.Log("Quitting!");
+                TinderBoxAPI.GameOver();
+                Application.Quit();
             }
         }
     }
