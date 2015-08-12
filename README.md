@@ -1,5 +1,7 @@
 # TinderBox API
-This is the API for the TinderBox arcade system.
+This is the API for the TinderBox arcade system.  For information and discussion on the TinderBox, please visit https://www.progfrog.co/projects/34/log (coming soon - instructions for uploading your game and getting your Game ID).
+
+![controls](http://i.imgur.com/zgx0GoY.png)
 
 ## Workflow ##
 1. When a player chooses your game, our launcher will run your game's executable in a background process.
@@ -37,11 +39,9 @@ This is the API for the TinderBox arcade system.
         Button2,
         Button3,
         Button4,
-        Button5,
-        Start
+        Button5
     }
 ```
-
 
 ## Usage (non-Unity)
 1. To give the launcher a command, send an HTTP GET request to: http://localhost/api/{command}?game_id={your-game-id}
@@ -60,7 +60,6 @@ Button 2:   , (comma)
 Button 3:   . (period)
 Button 4:   / (slash)
 Button 5:   Right shift
-Start:      Return
 
 Player 2
 --------
@@ -73,7 +72,6 @@ Button 2:   G
 Button 3:   Y
 Button 4:   C
 Button 5:   F
-Start:      T
 
 Player 3
 --------
@@ -86,7 +84,6 @@ Button 2:   P
 Button 3:   L
 Button 4:   ; (semicolon)
 Button 5:   ' (single quote)
-Start:      [ (left bracket)
 
 Player 4
 --------
@@ -99,4 +96,4 @@ Button 2:   6
 Button 3:   7
 Button 4:   8
 Button 5:   9
-Start:      0
+```
