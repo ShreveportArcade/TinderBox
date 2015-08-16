@@ -186,8 +186,13 @@ namespace TinderBox
             yield return www;
             if (www.error != null)
             {
-                Debug.LogError(www.error);
+                //Debug.LogError(www.error);
             }
+        }
+
+        void Awake()
+        {
+            DontDestroyOnLoad(transform.gameObject);
         }
 
         float quitTimer = 0;
