@@ -1,15 +1,18 @@
 # TinderBox API
-This is the API for the TinderBox arcade system.
+This is the API for the TinderBox arcade system.  For information and discussion on the TinderBox, please visit https://www.progfrog.co/projects/34/log (coming soon - instructions for uploading your game and getting your Game ID).  This API is designed around Unity, but if your game can run on Linux you should be able to integrate it manually also (see below for details).
+
+![controls](http://i.imgur.com/zgx0GoY.png)
 
 ## Workflow ##
 1. When a player chooses your game, our launcher will run your game's executable in a background process.
 1. Once your game has loaded its assets and is ready to play, it should send a **game_ready** command to the launcher (see below).
 1. The launcher will present your game fullscreen at 1920x1080 resolution.
 1. After the player has completed a game and is out of continues (or lets your "continue playing?" timer run out), your game should send a **game_ended** command to bring the launcher back to the front.
+1. Do not exit your game - our launcher will kill your process when it's ready.
 
 ## Installation (for Unity)
 1. Import the TinderBoxAPI.unitypackage file into your Unity project.
-1. Add the TinderBoxObject prefab to your scene.
+1. Add the TinderBoxObject prefab to your scene (specifically, every scene that will call IsReady() or GameEnded() needs a TinderBoxObject).
 1. In the TinderBoxObject inspector, set the **Game ID** field to your game's assigned ID.
 1. In your game's Player Settings, set "Display Resolution Dialog" to "Hidden By Default".
 
@@ -37,11 +40,9 @@ This is the API for the TinderBox arcade system.
         Button2,
         Button3,
         Button4,
-        Button5,
-        Start
+        Button5
     }
 ```
-
 
 ## Usage (non-Unity)
 1. To give the launcher a command, send an HTTP GET request to: http://localhost/api/{command}?game_id={your-game-id}
@@ -60,7 +61,6 @@ Button 2:   , (comma)
 Button 3:   . (period)
 Button 4:   / (slash)
 Button 5:   Right shift
-Start:      Return
 
 Player 2
 --------
@@ -73,7 +73,6 @@ Button 2:   G
 Button 3:   Y
 Button 4:   C
 Button 5:   F
-Start:      T
 
 Player 3
 --------
@@ -86,7 +85,6 @@ Button 2:   P
 Button 3:   L
 Button 4:   ; (semicolon)
 Button 5:   ' (single quote)
-Start:      [ (left bracket)
 
 Player 4
 --------
@@ -99,4 +97,4 @@ Button 2:   6
 Button 3:   7
 Button 4:   8
 Button 5:   9
-Start:      0
+```
