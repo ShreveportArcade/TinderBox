@@ -1,5 +1,5 @@
 # TinderBox API
-This is the API for the TinderBox arcade system.  For information and discussion on the TinderBox, please visit https://www.progfrog.co/projects/34/log (coming soon - instructions for uploading your game and getting your Game ID).  This API is designed around Unity, but if your game can run on Linux you should be able to integrate it manually also (see below for details).
+This is Shreveport Arcade's fork of the API for the TinderBox arcade system by our good friends over at [Flint & Tinder Studios](http://www.flintandtinderstudios.com/).  For information and discussion on the TinderBox, please visit https://www.progfrog.co/projects/34/log (coming soon - instructions for uploading your game and getting your Game ID).  This API is designed around Unity, but if your game can run on Linux you should be able to integrate it manually also (see below for details).
 
 ![controls](http://i.imgur.com/zgx0GoY.png)
 
@@ -12,7 +12,7 @@ This is the API for the TinderBox arcade system.  For information and discussion
 
 ## Installation (for Unity)
 1. Import the TinderBoxAPI.unitypackage file into your Unity project.
-1. Add the TinderBoxObject prefab to your scene (specifically, every scene that will call IsReady() or GameEnded() needs a TinderBoxObject).
+1. Add the TinderBoxObject prefab to your initial scene.
 1. In the TinderBoxObject inspector, set the **Game ID** field to your game's assigned ID.
 1. In your game's Player Settings, set "Display Resolution Dialog" to "Hidden By Default".
 
