@@ -8,12 +8,14 @@ namespace TinderBox
     {
         static void _IsReady()
         {
-            Instance.CallURL(MakeURL(IsReadyURL));
+            Debug.Log("IsReady");
+            TinderBoxObject.Instance.CallURL(MakeURL(IsReadyURL));
         }
 
         static void _GameOver()
         {
-            Instance.CallURL(MakeURL(GameOverURL));
+            Debug.Log("GameOver");
+            TinderBoxObject.Instance.CallURL(MakeURL(GameOverURL));
         }
         static readonly string BaseURL = "http://localhost/api/";
         static readonly string IsReadyURL = "game_ready";
@@ -22,7 +24,7 @@ namespace TinderBox
 
         static string MakeURL(string urlType)
         {
-            string id = Instance.GameID;
+            string id = TinderBoxObject.Instance.GameID;
             if (string.IsNullOrEmpty(id))
             {
                 throw new Exception("The Game ID needs to be set in the Tinderbox Object.");
@@ -159,21 +161,20 @@ namespace TinderBox
             return Input.GetKeyDown(ControlsToKeyCode(player, control));
         }
 
-        static TinderBoxObject _instance = null;
-        static TinderBoxObject Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = GameObject.FindObjectOfType<TinderBoxObject>();
-                }
-                return _instance;
-            }
-        }
+        
     }
     public class TinderBoxObject : MonoBehaviour
     {
+
+        static TinderBoxObject _instance = null;
+        public static TinderBoxObject Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
         public string GameID = "";
         public void CallURL(string url)
         {
@@ -192,21 +193,33 @@ namespace TinderBox
 
         void Awake()
         {
-            DontDestroyOnLoad(transform.gameObject);
+            if (_instance == null)
+            {
+                _instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Debug.Log("TinderBoxObject exists, destroying duplicate");
+                GameObject.Destroy(gameObject);
+            }
+            
+        }
+
+        IEnumerator Start()
+        {
+            yield return new WaitForEndOfFrame();
+            TinderBoxAPI.IsReady();
         }
 
         float quitTimer = 0;
         void Update()
         {
-            // If all players hold Button 4 and 5 simultaneously for 5 seconds, the game ends.
-            if (TinderBoxAPI.ControlState(Players.Player1, Controls.Button4)
-            && TinderBoxAPI.ControlState(Players.Player2, Controls.Button4)
-            && TinderBoxAPI.ControlState(Players.Player3, Controls.Button4)
-            && TinderBoxAPI.ControlState(Players.Player4, Controls.Button4)
-            && TinderBoxAPI.ControlState(Players.Player1, Controls.Button5)
-            && TinderBoxAPI.ControlState(Players.Player2, Controls.Button5)
-            && TinderBoxAPI.ControlState(Players.Player3, Controls.Button5)
-            && TinderBoxAPI.ControlState(Players.Player4, Controls.Button5))
+            // If any player holds Button 4 and 5 simultaneously for 5 seconds, the game ends.
+            if (TinderBoxAPI.ControlState(Players.Player1, Controls.Button4) && TinderBoxAPI.ControlState(Players.Player1, Controls.Button5)
+             || TinderBoxAPI.ControlState(Players.Player2, Controls.Button4) && TinderBoxAPI.ControlState(Players.Player2, Controls.Button5)
+             || TinderBoxAPI.ControlState(Players.Player3, Controls.Button4) && TinderBoxAPI.ControlState(Players.Player3, Controls.Button5)
+             || TinderBoxAPI.ControlState(Players.Player4, Controls.Button4) && TinderBoxAPI.ControlState(Players.Player4, Controls.Button5))
             {
                 quitTimer += Time.deltaTime;
             } 
@@ -216,9 +229,14 @@ namespace TinderBox
             }
             if (quitTimer > TinderBoxAPI.QuitCommandHoldLength) {
                 Debug.Log("Quitting!");
-                TinderBoxAPI.GameOver();
                 Application.Quit();
             }
+        }
+
+
+        void OnApplicationQuit() 
+        {
+            TinderBoxAPI.GameOver();
         }
     }
 }
